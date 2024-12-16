@@ -16,13 +16,13 @@ public final class com/xemantic/ai/file/magic/ContentType$Companion {
 }
 
 public final class com/xemantic/ai/file/magic/ContentTypeKt {
+	public static final fun detectContentType (Lkotlinx/io/files/Path;)Lcom/xemantic/ai/file/magic/ContentType;
 	public static final fun detectContentType ([B)Lcom/xemantic/ai/file/magic/ContentType;
 	public static final fun startsWith ([B[Ljava/lang/String;)Z
 	public static final fun startsWith-VU-fvBY ([B[B)Z
 }
 
 public final class com/xemantic/ai/file/magic/PathsKt {
-	public static final fun detectContentType (Lkotlinx/io/files/Path;)Lcom/xemantic/ai/file/magic/ContentType;
 	public static final fun readText (Lkotlinx/io/files/Path;)Ljava/lang/String;
 	public static final fun toBytes (Lkotlinx/io/files/Path;)[B
 }
