@@ -22,7 +22,7 @@ import kotlinx.io.files.SystemFileSystem
 import kotlinx.io.readByteArray
 import kotlinx.io.readString
 
-public fun Path.toBytes(): ByteArray = SystemFileSystem.source(
+public fun Path.readBytes(): ByteArray = SystemFileSystem.source(
   this
 ).buffered().use {
   it.readByteArray()

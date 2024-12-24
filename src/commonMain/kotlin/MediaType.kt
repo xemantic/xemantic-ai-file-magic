@@ -18,8 +18,11 @@ package com.xemantic.ai.file.magic
 
 import kotlinx.io.files.Path
 
+/**
+ * A subset of MIME types and associated type detectors.
+ */
 @OptIn(ExperimentalUnsignedTypes::class)
-public enum class ContentType(
+public enum class MediaType(
   public val mime: String,
   private val detect: (ByteArray) -> Boolean
 ) {
@@ -36,7 +39,7 @@ public enum class ContentType(
 
   GIF(
     mime = "image/gif",
-    detect = { it.startsWith("GIF87", "GIF89") }
+    detect = { it.startsWith("GIF87") || it.startsWith("GIF89") }
   ),
 
   WEBP(
@@ -53,7 +56,7 @@ public enum class ContentType(
 
     public fun detect(
       bytes: ByteArray
-    ): ContentType? = entries.find {
+    ): MediaType? = entries.find {
       it.detect(bytes)
     }
 
@@ -62,18 +65,18 @@ public enum class ContentType(
 }
 
 public fun ByteArray.startsWith(
-  vararg values: String
-): Boolean = values.any {
-  (size >= it.length)
-      && sliceArray(0 ..< it.length)
-        .contentEquals(it.encodeToByteArray())
-}
+  data: String
+): Boolean = (size >= data.length)
+      && sliceArray(0 ..< data.length)
+        .contentEquals(data.encodeToByteArray())
 
 @OptIn(ExperimentalUnsignedTypes::class)
 public fun ByteArray.startsWith(
   vararg bytes: UByte
-): Boolean = size >= bytes.size && sliceArray(0 ..< bytes.size).toUByteArray().contentEquals(bytes)
+): Boolean = (size >= bytes.size)
+    && sliceArray(0 ..< bytes.size)
+      .toUByteArray().contentEquals(bytes)
 
-public fun ByteArray.detectContentType(): ContentType? = ContentType.detect(this)
+public fun ByteArray.detectMediaType(): MediaType? = MediaType.detect(this)
 
-public fun Path.detectContentType(): ContentType? = toBytes().detectContentType()
+public fun Path.detectMediaType(): MediaType? = readBytes().detectMediaType()
