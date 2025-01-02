@@ -5,7 +5,7 @@ javaTarget = "17"
 kotlin = "2.1.0"
 kotlinxIo = "0.6.0"
 
-xemanticKotlinTest = "1.0"
+xemanticKotlinTest = "1.1"
 
 versionsPlugin = "0.51.0"
 dokkaPlugin = "2.0.0"
