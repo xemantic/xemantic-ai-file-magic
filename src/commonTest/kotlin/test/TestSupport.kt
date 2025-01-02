@@ -16,10 +16,7 @@
 
 package com.xemantic.ai.file.magic.test
 
+import com.xemantic.kotlin.test.gradleRootDir
 import kotlinx.io.files.Path
 
-val testDataDir: Path = Path(gradleProjectRoot, "test-data")
-
-expect val gradleProjectRoot: String
-
-expect val isBrowserTest: Boolean
+val testDataDir: Path = Path(gradleRootDir, "test-data")

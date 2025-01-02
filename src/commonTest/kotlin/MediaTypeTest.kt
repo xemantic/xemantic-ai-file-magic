@@ -21,9 +21,9 @@ import com.xemantic.ai.file.magic.test.MINIMAL_JPEG
 import com.xemantic.ai.file.magic.test.MINIMAL_PDF
 import com.xemantic.ai.file.magic.test.MINIMAL_PNG
 import com.xemantic.ai.file.magic.test.MINIMAL_WEBP
-import com.xemantic.ai.file.magic.test.isBrowserTest
 import com.xemantic.ai.file.magic.test.testDataDir
 import com.xemantic.kotlin.test.assert
+import com.xemantic.kotlin.test.isBrowserPlatform
 import kotlinx.io.files.Path
 import kotlin.test.Test
 
@@ -42,7 +42,7 @@ class MediaTypeTest {
 
   @Test
   fun `Should detect MediaTypes of Paths`() {
-    if (isBrowserTest) return // we don't have file access in the browser, but we do have with node.js
+    if (isBrowserPlatform) return // we don't have file access in the browser, but we do have with node.js
     assert(Path(testDataDir, "minimal.gif").detectMediaType() == MediaType.GIF)
     assert(Path(testDataDir, "minimal.jpeg").detectMediaType() == MediaType.JPEG)
     assert(Path(testDataDir, "minimal.pdf").detectMediaType() == MediaType.PDF)
@@ -52,7 +52,7 @@ class MediaTypeTest {
 
   @Test
   fun `Should not detect MediaTypes of a Path with empty file`() {
-    if (isBrowserTest) return // we don't have file access in the browser, but we do have with node.js
+    if (isBrowserPlatform) return // we don't have file access in the browser, but we do have with node.js
     assert(Path(testDataDir, "zero.txt").detectMediaType() == null)
   }
 

@@ -2,11 +2,13 @@
 
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.swiftexport.ExperimentalSwiftExportDsl
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 
@@ -43,6 +45,21 @@ println("""
 +--------------------------------------------
 """
 )
+
+val gradleRootDir: String = rootDir.absolutePath
+
+tasks.withType<KotlinJvmTest>().configureEach {
+  environment("GRADLE_ROOT_DIR", gradleRootDir)
+}
+
+tasks.withType<KotlinJsTest>().configureEach {
+  environment("GRADLE_ROOT_DIR", gradleRootDir)
+}
+
+tasks.withType<KotlinNativeTest>().configureEach {
+  environment("GRADLE_ROOT_DIR", gradleRootDir)
+  environment("SIMCTL_CHILD_GRADLE_ROOT_DIR", gradleRootDir)
+}
 
 repositories {
   mavenCentral()
@@ -300,13 +317,4 @@ if (isReleaseBuild) {
     }
   }
 
-}
-
-tasks.withType<KotlinJvmTest>().configureEach {
-  environment("GRADLE_PROJECT_ROOT", rootDir)
-}
-
-tasks.withType<KotlinNativeTest>().configureEach {
-  environment("SIMCTL_CHILD_GRADLE_PROJECT_ROOT", rootDir)
-  environment("GRADLE_PROJECT_ROOT", rootDir)
 }
