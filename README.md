@@ -34,7 +34,7 @@ In `build.gradle.kts` add:
 
 ```kotlin
 dependencies {
-    implementation("com.xemantic.ai:xemantic-ai-file-magic:0.2")
+    implementation("com.xemantic.ai:xemantic-ai-file-magic:0.3")
 }
 ```
 
