@@ -16,7 +16,6 @@
 
 package com.xemantic.ai.file.magic
 
-import com.xemantic.ai.file.magic.MediaType.entries
 import kotlinx.io.files.Path
 
 /**
