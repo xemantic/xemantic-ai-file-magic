@@ -28,7 +28,7 @@ public fun Path.readBytes(): ByteArray = SystemFileSystem.source(
     it.readByteArray()
 }
 
-public fun Path.readText() = SystemFileSystem.source(
+public fun Path.readText(): String = SystemFileSystem.source(
     this
 ).buffered().use {
     it.readString()

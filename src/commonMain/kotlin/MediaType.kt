@@ -50,6 +50,11 @@ public enum class MediaType(
     PDF(
         mime = "application/pdf",
         detect = { it.startsWith("%PDF-") }
+    ),
+
+    TEXT(
+        mime = "text/plain",
+        detect = { _ -> false }  // Never auto-detects, use as explicit fallback
     );
 
     public companion object {
