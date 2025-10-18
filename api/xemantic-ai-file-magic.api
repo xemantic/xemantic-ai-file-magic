@@ -4,6 +4,7 @@ public final class com/xemantic/ai/file/magic/MediaType : java/lang/Enum {
 	public static final field JPEG Lcom/xemantic/ai/file/magic/MediaType;
 	public static final field PDF Lcom/xemantic/ai/file/magic/MediaType;
 	public static final field PNG Lcom/xemantic/ai/file/magic/MediaType;
+	public static final field TEXT Lcom/xemantic/ai/file/magic/MediaType;
 	public static final field WEBP Lcom/xemantic/ai/file/magic/MediaType;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getMime ()Ljava/lang/String;

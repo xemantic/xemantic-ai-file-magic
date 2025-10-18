@@ -25,7 +25,7 @@ import kotlin.test.Test
 class MediaTypeTest {
 
     @Test
-    fun `Should detect MediaTypes`() {
+    fun `should detect MediaTypes`() {
         assert(byteArrayOf().detectMediaType() == null)
         assert("foo".encodeToByteArray().detectMediaType() == null)
         assert(MINIMAL_PDF.detectMediaType() == MediaType.PDF)
@@ -36,7 +36,7 @@ class MediaTypeTest {
     }
 
     @Test
-    fun `Should detect MediaTypes of Paths`() {
+    fun `should detect MediaTypes of Paths`() {
         if (isBrowserPlatform) return // we don't have file access in the browser, but we do have with node.js
         assert(Path(testDataDir, "minimal.gif").detectMediaType() == MediaType.GIF)
         assert(Path(testDataDir, "minimal.jpeg").detectMediaType() == MediaType.JPEG)
@@ -46,9 +46,23 @@ class MediaTypeTest {
     }
 
     @Test
-    fun `Should not detect MediaTypes of a Path with empty file`() {
+    fun `should not detect MediaTypes of a Path with empty file`() {
         if (isBrowserPlatform) return // we don't have file access in the browser, but we do have with node.js
         assert(Path(testDataDir, "zero.txt").detectMediaType() == null)
+    }
+
+    @Test
+    fun `should use TEXT as explicit fallback`() {
+        // given
+        val textBytes = "Hello World".encodeToByteArray()
+
+        // TEXT never auto-detects
+        assert(textBytes.detectMediaType() == null)
+
+        // But can be used explicitly as fallback
+        val mediaType = textBytes.detectMediaType() ?: MediaType.TEXT
+        assert(mediaType == MediaType.TEXT)
+        assert(mediaType.mime == "text/plain")
     }
 
 }
